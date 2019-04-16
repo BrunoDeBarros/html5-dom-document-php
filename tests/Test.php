@@ -8,6 +8,7 @@
  */
 
 use IvoPetkov\HTML5DOMDocument;
+use IvoPetkov\HTML5DOMElement;
 
 /**
  * @runTestsInSeparateProcesses
@@ -1329,6 +1330,17 @@ class Test extends PHPUnit\Framework\TestCase
             $this->assertEquals($dom->querySelectorAll('*')->length, 1);
             $this->assertEquals($fragment, $dom->saveHTML());
         }
+    }
+
+    /**
+     *
+     */
+    public function testQuerySelectorWithSubElement()
+    {
+        $content = '<div class="test"><span>test</span></div>';
+        $dom = new HTML5DOMDocument();
+        $dom->loadHTML($content);
+        $this->assertInstanceOf(HTML5DOMElement::class, $dom->querySelector('.test span'));
     }
 
 }
